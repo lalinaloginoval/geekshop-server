@@ -12,7 +12,6 @@
 
     <title>{{ title|title }}</title>
 
-    <!-- Bootstrap core CSS -->
     <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
     {% block css %} {% endblock %}
@@ -35,7 +34,7 @@
                     <a class="nav-link" href="{% url 'products:index' %}">Каталог <i class="fas fa-shopping-bag"></i> </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="auth/login.html">Войти <i class="fas fa-sign-in-alt"></i></a>
+                    <a class="nav-link" href="{% url 'users:login' %}">Войти <i class="fas fa-sign-in-alt"></i></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="auth/profile.html">Валерий П.
