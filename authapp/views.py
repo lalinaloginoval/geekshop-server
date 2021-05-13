@@ -34,8 +34,7 @@ def register(request):
         form = UserRegisterForm()
     context = {
         'title': 'GeekShop - Регистрация',
-        'form': form,
-        'baskets': Basket.ob
+        'form': form
     }
     return render(request, 'authapp/register.html', context)
 
