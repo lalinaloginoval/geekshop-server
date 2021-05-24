@@ -21,8 +21,8 @@ class UserAdminProfileForm(UserProfileForm):
 class ProductAdminForm(forms.ModelForm):
     name = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control', 'placeholder': 'Введите название продукта'}))
-    category = forms.IntegerField(widget=forms.Select(attrs={
-        'class': 'form-control'}, choices=[(c.id, c.name) for c in ProductCategory.objects.all()]))
+    category = forms.ModelChoiceField(ProductCategory.objects.all(), widget=forms.Select(
+        attrs={'class': 'form-control'}))
     image = forms.ImageField(widget=forms.FileInput(attrs={'class': 'custom-file-input'}), required=False)
     price = forms.DecimalField(widget=forms.TextInput(attrs={
         'class': 'form-control', 'placeholder': 'Введите стоимость', 'type': 'number', 'min': '0'}))

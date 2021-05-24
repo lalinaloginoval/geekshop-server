@@ -63,10 +63,6 @@ def admin_products_read(request):
 def admin_products_create(request):
     if request.method == 'POST':
         form = ProductAdminForm(data=request.POST, files=request.FILES)
-
-        category = ProductCategory.objects.get(id=request.POST['category'])
-        form.instance.category_id = category.id
-
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('admin_staff:admin_products_read'))
@@ -81,10 +77,6 @@ def admin_products_update(request, product_id):
     selected_product = Product.objects.get(id=product_id)
     if request.method == 'POST':
         form = ProductAdminForm(data=request.POST, files=request.FILES, instance=selected_product)
-
-        category = ProductCategory.objects.get(id=request.POST['category'])
-        form.instance.category_id = category.id
-
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('admin_staff:admin_products_read'))
