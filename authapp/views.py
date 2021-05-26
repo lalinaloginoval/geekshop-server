@@ -1,42 +1,47 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import auth, messages
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 
 from authapp.forms import UserLoginForm, UserRegisterForm, UserProfileForm
 from basketapp.models import Basket
 
-
-def login(request):
-    if request.method == 'POST':
-        form = UserLoginForm(data=request.POST)
-        if form.is_valid():
-            username = request.POST['username']
-            password = request.POST['password']
-            user = auth.authenticate(username=username, password=password)
-            if user and user.is_active:
-                auth.login(request, user)
-                return HttpResponseRedirect(reverse('index'))
-    else:
-        form = UserLoginForm()
-    context = {'title': 'GeekShop - Авторизация', 'form': form}
-    return render(request, 'authapp/login.html', context)
+from django.views.generic.edit import FormView
 
 
-def register(request):
-    if request.method == 'POST':
-        form = UserRegisterForm(data=request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Вы успешно зарегистрировались!')
-            return HttpResponseRedirect(reverse('users:login'))
-    else:
-        form = UserRegisterForm()
-    context = {
-        'title': 'GeekShop - Регистрация',
-        'form': form
-    }
-    return render(request, 'authapp/register.html', context)
+class Login(FormView):
+    form_class = UserLoginForm
+    template_name = 'authapp/login.html'
+    success_url = reverse_lazy('index')
+
+    def get_context_data(self, **kwargs):
+        context = super(Login, self).get_context_data()
+        context.update({'title': 'GeekShop - Авторизация'})
+        return context
+
+    def form_valid(self, form):
+        username = self.request.POST['username']
+        password = self.request.POST['password']
+        user = auth.authenticate(username=username, password=password)
+        if user and user.is_active:
+            auth.login(self.request, user)
+            return HttpResponseRedirect(self.get_success_url())
+
+
+class Register(FormView):
+    form_class = UserRegisterForm
+    template_name = 'authapp/register.html'
+    success_url = reverse_lazy('users:login')
+
+    def get_context_data(self, **kwargs):
+        context = super(Register, self).get_context_data()
+        context.update({'title': 'GeekShop - Регистрация'})
+        return context
+
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, 'Вы успешно зарегистрировались!')
+        return HttpResponseRedirect(self.get_success_url())
 
 
 @login_required
