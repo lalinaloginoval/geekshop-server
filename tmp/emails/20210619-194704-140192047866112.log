@@ -1,0 +1,11 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Account verify
+From: login.study@yandex.ru
+To: qwert@mail.ru
+Date: Sat, 19 Jun 2021 19:47:04 -0000
+Message-ID: <162413202414.16938.4520328145473058054@MacBook-Pro-Alina.local>
+
+Your link for account activation: http://127.0.0.1:8000/users/verify/qwert@mail.ru/1bcaff098e289412b0fa6a2cbc656f673271fc0e
+-------------------------------------------------------------------------------

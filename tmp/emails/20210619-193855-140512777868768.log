@@ -1,0 +1,11 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Account verify
+From: login.study@yandex.ru
+To: ghj@mail.ru
+Date: Sat, 19 Jun 2021 19:38:55 -0000
+Message-ID: <162413153503.16826.11035413598289341427@1.0.0.127.in-addr.arpa>
+
+Your link for account activation: http://127.0.0.1:8000/users/verify/ghj@mail.ru/da1d215e8c24c59e36c9596e170903b30f67a2cb
+-------------------------------------------------------------------------------
