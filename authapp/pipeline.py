@@ -8,10 +8,11 @@ from authapp.models import UserProfile
 
 
 def save_user_profile(backend, user, response, *args, **kwargs):
-    if backend != 'vk_oauth2':
+    if backend.name != 'vk_oauth2':
         return
 
-    api_url = f"https://api.vk.com/method/users.get?fields=bdate,sex,about&access_token={response['access_token']}"
+    api_url = f"https://api.vk.com/method/users.get?fields=bdate,sex,about,photo_max_orig&v=5.131&" \
+              f"access_token={response['access_token']}"
 
     vk_response = requests.get(api_url)
     if vk_response.status_code != 200:
@@ -33,5 +34,13 @@ def save_user_profile(backend, user, response, *args, **kwargs):
         if age < 18:
             user.delete()
             raise AuthForbidden('social_core.backends.vk.VKOAuth2')
+
+    if vk_data['photo_max_orig']:
+        photo_link = vk_data['photo_max_orig']
+        photo_response = requests.get(photo_link)
+        user_photo_path = f'users_images/{user.id}.jpg'
+        with open(f'media/{user_photo_path}', 'wb') as photo_file:
+            photo_file.write(photo_response.content)
+        user.image = user_photo_path
 
     user.save()
