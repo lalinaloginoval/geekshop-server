@@ -1,0 +1,58 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link href="{% static 'css/profile.css' %}" rel="stylesheet">
+{% endblock %}
+{% block js %}
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'js/orders_scripts.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="text-center">
+        <div class="h2">
+            Ваши заказы, {% if user.first_name %} {{ user.first_name}} {% else %} Пользователь {% endif %}
+        </div>
+        <table class="table orders_list">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Создан</th>
+                <th>Обновлен</th>
+                <th>Статус</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in object_list %}
+            {% if item.is_active %}
+            <tr>
+                <td class="td1 orders_list">{{ item.pk }}</td>
+                <td>{{ item.created|date:"Y-m-d H:i:s" }}</td>
+                <td>{{ item.updated|date:"Y-m-d H:i:s" }}</td>
+                <td>{{ item.get_status_display }}</td>
+                <td>
+                    <a class="btn btn-link" href="{% url 'orders:read' item.pk %}">посмотреть</a>
+                </td>
+                <td>
+                    {% if item.status == 'FM' %}
+                    <a class="btn btn-link" href="{% url 'orders:update' item.pk %}">изменить</a>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if item.status == 'FM' %}
+                    <a class="btn btn-link" href="{% url 'orders:delete' item.pk %}">удалить</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+        <button class="btn">
+            <a href="{% url 'orders:create' %}">новый заказ</a>
+        </button>
+    </div>
+</div>
+{% endblock %}
