@@ -161,8 +161,8 @@ EMAIL_HOST_USER = 'login.study@yandex.ru'
 EMAIL_HOST_PASSWORD = 'Django302102'
 EMAIL_USE_SSL = True
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_FILE_PATH = 'tmp/emails/'
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = 'tmp/emails/'
 
 DOMAIN_NAME = 'https://194.58.104.171'
 
