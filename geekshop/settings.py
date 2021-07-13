@@ -94,8 +94,8 @@ DATABASES = {
     # }
 
     'default': {
-        'USER': 'django',
-        'NAME': 'geekshop-server',
+        'USER': 'postgres',
+        'NAME': 'geekshop',
         'ENGINE': 'django.db.backends.postgresql',
     }
 }
