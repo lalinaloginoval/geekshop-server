@@ -4,4 +4,4 @@ __pychache__/
 media
 .env
 vk.json
-env
+env/
