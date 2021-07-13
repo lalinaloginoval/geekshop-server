@@ -1,0 +1,52 @@
+    1  ssh-copy-id root@194.58.104.171
+    2  eval 'ssh-agent'
+    3  ssh-copy-id root@194.58.104.171
+    4  ssh-add
+    5  logout
+    6  apt update
+    7  apt install nganx
+    8  apt install nginx
+    9  apt install postgresql
+   10  apt install postgresql postgresql-contrlib
+   11  apt install postgresql postgresql-contrib
+   12  apt install python3-venv
+   13  apt install git
+   14  apt install mc
+   15  mcedit /etc/postgresql/12/main/pg_hba.conf
+   16  systemctl restart postgresql
+   17  systemctl status postgresql
+   18  hitory
+   19  history
+   20  useradd -g www-data -m django
+   21  cd /home/django/
+   22  git clone git@github.com:lalinaloginoval/geekshop-server.git
+   23  ls -al
+   24  python3 -m venv env
+   25  source env/bin/activate
+   26  deactivate
+   27  mc
+   28  cd geekshop-server/
+   29  python3 -m venv env
+   30  source env/bin/activate
+   31  pip3 install -r requirements.txt
+   32  pip3 install gunicorn
+   33  psql -U postgres
+   34  python3 manage.py migrate
+   35  git pull
+   36  python3 manage.py migrate
+   37  history
+   38  git pull
+   39  python3 manage.py migrate
+   40  python3 manage.py loaddata categories.json
+   41  python3 manage.py loaddata goods.json
+   42  python3 manage.py runserver
+   43  mcedit /etc/systemd/system/gunicorn.service
+   44  chown -R django /home/django/
+   45  chmod -R 755 /home/django/geekshop/
+   46  systemctl enable gunicorn
+   47  systemctl start gunicorn
+   48  systemctl status gunicorn
+   49  mcedit /etc/nginx/sites-available/geekshop
+   50  ln -s /etc/nginx/sites-available/geekshop /etc/nginx/sites-enabled
+   51  nginx -t
+   52  systemctl restart nginx
