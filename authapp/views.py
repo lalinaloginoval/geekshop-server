@@ -93,5 +93,5 @@ def verify(request, email, key):
         user.activation_key = ''
         user.activation_key_created = None
         user.save()
-        auth.login(request, user)
+        auth.login(request, user, backend='django.contrib.auth.backends.ModelBackend')
     return render(request, 'authapp/verify.html')
