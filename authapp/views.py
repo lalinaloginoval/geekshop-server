@@ -14,7 +14,7 @@ from basketapp.models import Basket
 from django.views.generic.edit import FormView
 
 
-class Login(FormView):
+class Login(FormView, backend='django.contrib.auth.backends.ModelBackend'):
     form_class = UserLoginForm
     template_name = 'authapp/login.html'
     success_url = reverse_lazy('index')
