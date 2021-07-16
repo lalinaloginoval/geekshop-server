@@ -14,7 +14,7 @@ from basketapp.models import Basket
 from django.views.generic.edit import FormView
 
 
-class Login(FormView, backend='django.contrib.auth.backends.ModelBackend'):
+class Login(FormView):
     form_class = UserLoginForm
     template_name = 'authapp/login.html'
     success_url = reverse_lazy('index')
@@ -29,7 +29,7 @@ class Login(FormView, backend='django.contrib.auth.backends.ModelBackend'):
         password = self.request.POST['password']
         user = auth.authenticate(username=username, password=password)
         if user and user.is_active:
-            auth.login(self.request, user)
+            auth.login(self.request, user, backend='django.contrib.auth.backends.ModelBackend')
             return HttpResponseRedirect(self.get_success_url())
 
 
