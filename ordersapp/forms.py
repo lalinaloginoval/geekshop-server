@@ -27,4 +27,4 @@ class OrderItemEditForm(forms.ModelForm):
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
 
-        self.fields['product'].gueryset = Product.objects.all().selected_related()
+        self.fields['product'].gueryset = Product.objects.all().select_related()
