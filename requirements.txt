@@ -7,3 +7,6 @@ psycopg2-binary
 social_auth_app_django
 requests~=2.25.1
 python-dotenv~=0.17.1
+django-debug-toolbar
+django-debug-toolbar-template-profiler
+wheel
