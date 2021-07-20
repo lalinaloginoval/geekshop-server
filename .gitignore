@@ -1,7 +1,6 @@
 .idea
 db.sqlite3
 __pychache__/
-media
 .env
 vk.json
 env/
