@@ -30,7 +30,9 @@ class ProductAdminForm(forms.ModelForm):
         'class': 'form-control', 'placeholder': 'Введите количество', 'type': 'number', 'min': '0'}))
     description = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control', 'placeholder': 'Введите описание'}))
+    discount = forms.IntegerField(widget=forms.TextInput(attrs={
+        'class': 'form-control', 'placeholder': 'Введите скидку', 'type': 'number', 'min': '0', 'max': '90'}))
 
     class Meta:
         model = Product
-        fields = ('name', 'category', 'image', 'price', 'quantity', 'description')
+        fields = ('name', 'category', 'image', 'price', 'quantity', 'description', 'discount',)
