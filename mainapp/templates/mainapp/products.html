@@ -1,5 +1,6 @@
 {% extends 'mainapp/base.html' %}
 {% load static %}
+{% load mathfilters %}
 
 {% block css %}
     <link href="{% static 'css/products.css' %}" rel="stylesheet">
@@ -52,18 +53,21 @@
 
             <div class="row">
                 {% for product in products %}
-
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
                             <a href="#">
                                 <img class="card-img-top"
                                      src="/media/{{ product.image }}"
-                                     alt="">
+                                     alt=""
+                                >
                             </a>
                             <div class="card-body">
                                 <h4 class="card-title">
                                     <a href="#">{{ product.name }}</a>
                                 </h4>
+                                {% if product.discount > 0 %}
+                                    <h8 style="color: red">Цена со скидкой {{ product.discount }}%</h8>
+                                {% endif %}
                                 <h5>{{ product.price }} руб.</h5>
                                 <p class="card-text">{{ product.description }}</p>
                             </div>

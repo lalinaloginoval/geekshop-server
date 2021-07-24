@@ -1,3 +1,4 @@
+from django.db.models import F
 from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import user_passes_test
@@ -83,6 +84,15 @@ class ProductUpdateView(UpdateView):
     @method_decorator(user_passes_test(lambda u: u.is_superuser))
     def dispatch(self, request, *args, **kwargs):
         return super(ProductUpdateView, self).dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        if 'discount' in form.cleaned_data:
+            discount = form.cleaned_data['discount']
+            if discount:
+                self.object.price = F('price') * (1 - discount / 100)
+                self.object.discount = discount
+
+        return super().form_valid(form)
 
 
 @user_passes_test(lambda u: u.is_superuser)
